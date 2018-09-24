@@ -1,4 +1,3 @@
-from flask import Flask
 from ceasar import rotate_string
 from flask import Flask, request
 import string
@@ -13,14 +12,14 @@ form = """
 <html>
     <head>
         <style>
-            form {
+            form {{
                 background-color: #eee;
                 padding: 20px;
                 margin: 0 auto;
                 width: 540px;
                 font: 16px sans-serif;
                 border-radius: 10px;
-            }
+            }}
             textarea {{
                 margin: 10px 0;
                 width: 540px;
@@ -50,11 +49,13 @@ def encrypt():
     a = int(request.form['rot'])
     b = str(request.form['text'])
     c = rotate_string(b,a)
-    return "<h1>" + c + "<h1>"
+    return "<h1>" + form.format(c) + "<h1>"
 
 
-@app.route("/", methods=['GET','POST'])
+
+@app.route("/", methods=['GET'])
 def index():
-    return form
+    
+    return form.format("")
 
 app.run()
